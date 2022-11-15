@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Zero_Hunger_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AssignEmployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EID" Type="Int32" Nullable="false" />
+    <Property Name="RID" Type="Int32" Nullable="false" />
+    <Property Name="CRID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_AssignEmployees_AssignEmployees" FromRole="AssignEmployees" ToRole="Employees" />
+    <NavigationProperty Name="CollectRequest" Relationship="Self.FK_AssignEmployees_CollectRequests" FromRole="AssignEmployees" ToRole="CollectRequests" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK_AssignEmployees_Restaurants" FromRole="AssignEmployees" ToRole="Restaurants" />
+    <Property Name="RName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaxPreservedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CollectRequest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PresentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MaxPreservedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ForHowManyPersons" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AssignEmployees" Relationship="Self.FK_AssignEmployees_CollectRequests" FromRole="CollectRequests" ToRole="AssignEmployees" />
+    <NavigationProperty Name="Restaurant" Relationship="Self.FK_CollectRequests_Restaurants" FromRole="CollectRequests" ToRole="Restaurants" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AssignEmployees" Relationship="Self.FK_AssignEmployees_AssignEmployees" FromRole="Employees" ToRole="AssignEmployees" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Restaurant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AssignEmployees" Relationship="Self.FK_AssignEmployees_Restaurants" FromRole="Restaurants" ToRole="AssignEmployees" />
+    <NavigationProperty Name="CollectRequests" Relationship="Self.FK_CollectRequests_Restaurants" FromRole="Restaurants" ToRole="CollectRequests" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AssignEmployees_AssignEmployees">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+    <End Role="AssignEmployees" Type="Self.AssignEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssignEmployees">
+        <PropertyRef Name="EID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssignEmployees_CollectRequests">
+    <End Role="CollectRequests" Type="Self.CollectRequest" Multiplicity="1" />
+    <End Role="AssignEmployees" Type="Self.AssignEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CollectRequests">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssignEmployees">
+        <PropertyRef Name="CRID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssignEmployees_Restaurants">
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="AssignEmployees" Type="Self.AssignEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurants">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssignEmployees">
+        <PropertyRef Name="RID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectRequests_Restaurants">
+    <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="1" />
+    <End Role="CollectRequests" Type="Self.CollectRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Restaurants">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectRequests">
+        <PropertyRef Name="RID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Zero_Hunger_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AssignEmployees" EntityType="Self.AssignEmployee" />
+    <EntitySet Name="CollectRequests" EntityType="Self.CollectRequest" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+    <AssociationSet Name="FK_AssignEmployees_AssignEmployees" Association="Self.FK_AssignEmployees_AssignEmployees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="AssignEmployees" EntitySet="AssignEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssignEmployees_CollectRequests" Association="Self.FK_AssignEmployees_CollectRequests">
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+      <End Role="AssignEmployees" EntitySet="AssignEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssignEmployees_Restaurants" Association="Self.FK_AssignEmployees_Restaurants">
+      <End Role="Restaurants" EntitySet="Restaurants" />
+      <End Role="AssignEmployees" EntitySet="AssignEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectRequests_Restaurants" Association="Self.FK_CollectRequests_Restaurants">
+      <End Role="Restaurants" EntitySet="Restaurants" />
+      <End Role="CollectRequests" EntitySet="CollectRequests" />
+    </AssociationSet>
+    <EntitySet Name="NGOs" EntityType="Zero_Hunger_DBModel.NGO" />
+  </EntityContainer>
+  <EntityType Name="NGO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Zero_Hunger_DBModelStoreContainer" CdmEntityContainer="Zero_Hunger_DBEntities">
+    <EntitySetMapping Name="AssignEmployees">
+      <EntityTypeMapping TypeName="Zero_Hunger_DBModel.AssignEmployee">
+        <MappingFragment StoreEntitySet="AssignEmployees">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="MaxPreservedTime" ColumnName="MaxPreservedTime" />
+          <ScalarProperty Name="RLocation" ColumnName="RLocation" />
+          <ScalarProperty Name="RName" ColumnName="RName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EID" ColumnName="EID" />
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="CRID" ColumnName="CRID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CollectRequests">
+      <EntityTypeMapping TypeName="Zero_Hunger_DBModel.CollectRequest">
+        <MappingFragment StoreEntitySet="CollectRequests">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PresentTime" ColumnName="PresentTime" />
+          <ScalarProperty Name="MaxPreservedTime" ColumnName="MaxPreservedTime" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="ForHowManyPersons" ColumnName="ForHowManyPersons" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RID" ColumnName="RID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="Zero_Hunger_DBModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Restaurants">
+      <EntityTypeMapping TypeName="Zero_Hunger_DBModel.Restaurant">
+        <MappingFragment StoreEntitySet="Restaurants">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NGOs">
+      <EntityTypeMapping TypeName="Zero_Hunger_DBModel.NGO">
+        <MappingFragment StoreEntitySet="NGOs">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
